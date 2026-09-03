@@ -71,3 +71,8 @@ TRUTH-014 │ Se o histórico do repositório original do fornecedor for recebid
 Source: docs/production_notes.txt (legado)
 Owner: Segurança da Informação (AuctaPay)
 Last reviewed: 2026-09-03
+
+TRUTH-015 │ O legado IGNORA silenciosamente pagamentos sem título correspondente (ex.: P003, documento NF-9999): eles não aparecem em nenhuma saída. Comportamento observado — na nova solução, pagamento órfão deve virar divergência visível (EX-01), decisão a ratificar pelo dono do número.
+Source: recomputação independente de 2026-09-03 + tests/fixtures/expected_exceptions.csv
+Owner: Rafael Costa (Controladoria)
+Last reviewed: 2026-09-03
