@@ -1,0 +1,6 @@
+id,insumo,descricao,comportamento_legado_observado,tratamento_esperado_na_nova_solucao,bloqueia_publicacao
+EX-01,payments.json P003,pagamento com documento NF-9999 sem titulo correspondente (orfao),IGNORADO silenciosamente — nao aparece em nenhuma saida (TRUTH-015),listar como divergencia 'pagamento sem titulo' na fila,sim
+EX-02,titles.json T002 x payments.json P002,match aproximado (dif R$4) pago apos o vencimento,APPROVED automatico (defeito candidato TRUTH-003),replicar na baseline; classificacao final (regra ou defeito) e decisao de Rafael Costa,nao (gate de decisao no 1o /change-number)
+EX-03,datas,data_pagamento posterior ao vencimento,nao considerada pelo matching,decidir com dono do numero se vira criterio ou alerta,nao
+EX-04,parametro tolerancia,tolerancia R$5.00 hardcoded sem fonte,numero magico no codigo,parametrizar com nome/fonte/owner (blueprint 3.8) antes de qualquer alteracao,sim (para mudancas de regra)
+EX-05,campo processed_on,data de processamento = dia da execucao,nao deterministico entre execucoes,harness ignora o campo; nova solucao registra timestamp com trilha,nao
