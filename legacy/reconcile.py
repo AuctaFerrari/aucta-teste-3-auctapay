@@ -9,7 +9,7 @@ def reconcile_records(titles, payments):
                 payment
                 for payment in payments
                 if payment.get("documento") == title.get("documento")
-                and abs(payment["valor"] - title["valor"]) <= 5.00
+                and abs(payment["valor"] - title["valor"]) <= 3.00
             ),
             None,
         )
