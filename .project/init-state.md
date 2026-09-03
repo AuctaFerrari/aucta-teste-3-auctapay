@@ -2,7 +2,7 @@
 init_version: 0.3.0
 projeto: "AuctaPay Concilia — Modernização"
 repo: "AuctaFerrari/aucta-teste-3-auctapay"
-risk_tier: null
+risk_tier: 3
 status_geral: em_andamento
 iniciado_em: 2026-09-03
 atualizado_em: 2026-09-03
@@ -16,7 +16,7 @@ Arquivo de estado do Aucta Dev Init. Registra **progresso**, não conteúdo: res
 
 | Sub-skill | Status | Última atualização | Evidência |
 | --- | --- | --- | --- |
-| init-interview | em_andamento | 2026-09-03 | A, B, C fechados; ZIP do legado recebido e inventariado; rodada F/H em andamento |
+| init-interview | concluida | 2026-09-03 | Artefatos canônicos commitados (a8b6183): PROJECT, TRUTHS (14), GLOSSARY, ACCEPTANCE (ACC-001..008), OWNERS; tier 3 |
 | init-repo | pendente | | repo criado via template (bootstrap assistido 2026-09-03) |
 | init-data | pendente | | ZIP extraído e lido na sessão; catálogo formal pendente |
 | init-plugin | pendente | | |
@@ -26,21 +26,21 @@ Arquivo de estado do Aucta Dev Init. Registra **progresso**, não conteúdo: res
 
 | Bloco | Status | Notas |
 | --- | --- | --- |
-| A. Problema e objetivo | concluida | confirmado 2026-09-03; KPIs: tempo de conciliação, divergências tratadas, rastreabilidade p/ auditoria, fim do manual em planilha |
-| B. Escopo e fronteiras | concluida | v1 replica regras de matching fielmente; correção de regras fora da v1; reutilização de código/deps NÃO autorizada até verificação de IP/licenças; sem implementação/refactor durante o /init |
-| C. Stakeholders e decisão | concluida | Sponsor: Mariana Torres (CFO); dono do número: Rafael Costa (Controladoria); produção: aprovação conjunta Rafael Costa + Segurança da Informação |
-| D. Entregáveis e aceite | em_andamento | web interna, homolog+prod; mecanismo de aprovação pendente |
-| E. Dados e fontes (inventário) | em_andamento | ZIP inventariado (14 arquivos); nomes do ERP e do provedor pendentes |
-| F. Segurança e privacidade | em_andamento | GATILHO: PII real; login corporativo = Microsoft Entra ID (achado no .env.example, a confirmar); política de dados em homolog pendente |
-| G. IP e licenças | em_andamento | LICENSE_STATUS.md do legado CONFIRMA: titularidade não confirmada, `legacy-match-sdk` sem licença/fonte, redistribuição NÃO autorizada — blocker mantido |
-| H. Arquitetura inicial | em_andamento | legado: Flask 1-endpoint + SQLite local, sem auth; infra de homolog/prod pendente |
-| I. Ambientes e acessos | em_andamento | homolog e prod previstos; sandbox API e SSO pendentes (blockers) |
+| A. Problema e objetivo | concluida | PROJECT.md |
+| B. Escopo e fronteiras | concluida | PROJECT.md; v1 replica matching fielmente; reutilização de código/deps suspensa (TRUTH-005) |
+| C. Stakeholders e decisão | concluida | OWNERS.md; produção = aprovação conjunta Rafael Costa + SI |
+| D. Entregáveis e aceite | concluida | ACCEPTANCE.md; aceite por comentário de aprovação no PR (TRUTH-009) |
+| E. Dados e fontes (inventário) | concluida | inventário: ZIP legado (código+massa+docs), ERP (sistema a nomear), API provedor (a nomear), webhooks; detalhamento no init-data |
+| F. Segurança e privacidade | concluida | Entra ID confirmado (TRUTH-007); homolog só mascarado/sintético (TRUTH-008); saneamento de histórico do fornecedor (TRUTH-014) |
+| G. IP e licenças | bloqueada | LICENSE_STATUS.md: titularidade não confirmada; reutilização suspensa — blocker ativo (TRUTH-005) |
+| H. Arquitetura inicial | concluida | PROJECT.md (arquitetura em uma página); Azure condicionado a aprovação formal (TRUTH-012); PostgreSQL previsto |
+| I. Ambientes e acessos | concluida | homolog+prod; sandbox API e SSO seguem como blockers |
 | J. Repositório e governança | pendente | executado no init-repo |
-| K. Estratégia de testes | em_andamento | baseline característica JÁ REPRODUZIDA na sessão (ver Achados do legado) — formalização no init-repo |
-| L. Conhecimento canônico | pendente | taxonomia de evidência definida (Decisões de método) |
+| K. Estratégia de testes | concluida | ACCEPTANCE.md "Como vamos provar": golden desde a baseline, regressão, E2E por perfil, threat model tier 3 |
+| L. Conhecimento canônico | concluida | TRUTHS.md (14) + GLOSSARY.md com taxonomia de evidência |
 | M. Plugin e skill stack | pendente | executado no init-plugin |
-| N. Release e sustentação | pendente | |
-| O. Baseline | em_andamento | snapshot limpo do ZIP validado; commit da baseline no init-repo |
+| N. Release e sustentação | concluida | backups/ por release no OneDrive (TRUTH-013); sustentação pós-entrega A DEFINIR (pendência em OWNERS.md) |
+| O. Baseline | em_andamento | snapshot limpo validado e harness reproduzido na sessão; commit da baseline + tag no init-repo |
 
 ## Decisões de método (consultor, 2026-09-03)
 
@@ -53,22 +53,25 @@ Arquivo de estado do Aucta Dev Init. Registra **progresso**, não conteúdo: res
 - **Baseline reproduzida com exatidão**: `reconcile_records` sobre a massa sintética reproduz 3/3 resultados de `baseline/baseline_expected.json` (T001 APPROVED, T002 APPROVED, T003 OPEN) usando apenas Python padrão — sem instalar dependências.
 - **Regra de matching observada**: mesmo `documento` E diferença de valor ≤ R$ 5,00 → APPROVED automático. Tolerância de R$ 5,00 é número mágico sem fonte. **T002 (dif. R$ 4,00, pago após o vencimento) é aprovado automaticamente — comportamento observado, defeito candidato, NÃO regra aprovada** (known_concern do próprio ZIP).
 - **Dependências declaradas mas NÃO usadas no código**: `requests`, `fuzzywuzzy` e `legacy-match-sdk` não são importadas por nenhum módulo. A baseline NÃO depende do SDK sem licença.
-- **Higiene de segredos**: snapshot atual contém apenas placeholders (grep local limpo). `production_notes.txt` alerta que o HISTÓRICO do repo original do fornecedor teve token de homologação (revogado, não saneado) — se o histórico original for recebido algum dia, sanear antes de importar; acionar Segurança da Informação.
-- **Fragilidades do legado**: sem autenticação, `debug=True`, secret hardcoded de demonstração, SQLite ao lado do código, ambiente não pinado (Windows/Py 3.10, versões não capturadas), sem testes automatizados.
-- **Login corporativo**: `.env.example` referencia ENTRA_TENANT_ID/ENTRA_CLIENT_ID → Microsoft Entra ID (a confirmar com o consultor).
+- **Higiene de segredos**: snapshot atual contém apenas placeholders (grep local limpo). `production_notes.txt` alerta que o HISTÓRICO do repo original do fornecedor teve token de homologação (revogado, não saneado) — se recebido, sanear antes de importar; acionar SI (TRUTH-014).
+- **Fragilidades do legado**: sem autenticação, `debug=True`, secret hardcoded de demonstração, SQLite ao lado do código, ambiente não pinado, sem testes automatizados.
 - **Spec da API do provedor é parcial**: autenticação, assinatura de webhook, paginação, rate limits e erros pendentes.
 
 ## Premissas
 
-- Massa de dados no ZIP é 100% sintética (declaração do consultor + README do ZIP); dado real de cliente NUNCA entra no Git.
+- Massa de dados no ZIP é 100% sintética (declaração do consultor + README do ZIP).
 - Repo privado no plano Free: proteção de main "Not enforced" — premissa de risco dos Testes 1 e 2; produção real exige org + plano Team.
+- Owner funcional = Rafael Costa (Controladoria) — adotado por inferência; confirmar com o consultor/sponsor.
+- Nomes do ERP e do provedor de pagamentos ainda não informados — catálogo do init-data registrará como "a nomear" até resposta.
 
 ## Blockers
 
-- **Credenciais do sandbox da API do provedor** — não recebidas. Bloqueia: integração de consulta e webhooks. Ação: AuctaPay solicitar ao provedor. Owner: Mariana Torres (sponsor) / a detalhar.
-- **Configuração do login corporativo (Entra ID)** — não recebida. Bloqueia: autenticação e release em homologação. Ação: TI AuctaPay fornecer tenant/client. Owner: Segurança da Informação.
-- **Titularidade e licenças do código legado não verificadas** — LICENSE_STATUS.md confirma; `legacy-match-sdk` sem licença/fonte. Bloqueia: reutilização de qualquer trecho/dependência do legado (não bloqueia baseline nem diagnóstico — baseline não usa o SDK). Ação: AuctaPay localizar contrato do fornecedor; revisão jurídica das dependências. Owner: Mariana Torres.
-- **Spec da API do provedor incompleta** — auth/assinatura/paginação/erros pendentes. Bloqueia: desenho final da integração. Ação: AuctaPay obter spec completa do provedor.
+- **Credenciais do sandbox da API do provedor** — não recebidas. Bloqueia: integrações (M5) e ACC-004/005. Ação: AuctaPay solicitar ao provedor. Owner: Mariana Torres.
+- **Configuração do login corporativo (Entra ID)** — não recebida. Bloqueia: SSO/perfis (M6), ACC-007 e release em homologação. Ação: TI AuctaPay fornecer tenant/client. Owner: Segurança da Informação.
+- **Titularidade e licenças do código legado não verificadas** — bloqueia: reutilização de qualquer trecho/dependência do legado (NÃO bloqueia baseline, diagnóstico nem reescrita limpa). Ação: localizar contrato do fornecedor; revisão jurídica. Owner: Mariana Torres.
+- **Spec da API do provedor incompleta** — bloqueia: desenho final da integração (M5). Ação: AuctaPay obter spec completa.
+- **Aprovação formal da arquitetura Azure** — pendente. Bloqueia: primeiro deploy em homolog/prod e estratégia de backup operacional (RPO/RTO). Owner: Segurança da Informação + Rafael Costa.
+- **Sustentação pós-entrega sem dono** — bloqueia: release final/sustentação (não bloqueia desenvolvimento). Owner da decisão: Mariana Torres.
 
 ## Achados de ambiente
 
@@ -77,4 +80,4 @@ Arquivo de estado do Aucta Dev Init. Registra **progresso**, não conteúdo: res
 
 ## Retomada
 
-- Próximo passo: fechar F (dados em homolog), H (infra alvo), confirmar Entra ID; depois D (mecanismo de aceite), E (nomes ERP/provedor), N (sustentação); consolidar artefatos canônicos.
+- Próximo passo: Etapa 2 de 5 — init-repo (governança do repositório, proteção da main, CODEOWNERS, CI; commit do snapshot do legado + tag baseline + harness — bloco O).
