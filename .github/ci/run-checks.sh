@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
-# Checks do projeto — adaptado pelo init-repo (item 8).
-# Tier >= 2: harness de golden cases com recomputação INDEPENDENTE (nunca o código sob teste).
+# Checks do projeto AuctaPay Concilia (tier 3) — adaptado pelo init-repo (item 8).
+# O harness compara o motor legado com a referência EXTERNA baseline_expected.json;
+# o resultado esperado nunca é recalculado pelo código sob teste.
 set -euo pipefail
-echo "Nenhum check específico configurado ainda — adapte .github/ci/run-checks.sh ao projeto."
+
+echo "== ACC-001: baseline de caracterização do legado =="
+python3 tests/regression/baseline_check.py

@@ -1,0 +1,7 @@
+Observed workstation environment (not reproducibly pinned):
+- Windows 11
+- Python reported as 3.10.x
+- Dependency versions not captured
+- SQLite file stored beside source code
+- No automated test command
+- No release tag or checksum recorded

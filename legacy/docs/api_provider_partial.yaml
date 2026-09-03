@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  title: Provider Payments API
+  version: partial-draft
+paths:
+  /payments:
+    get:
+      summary: Lists payments
+      responses:
+        "200":
+          description: Success
+  /webhooks/payment:
+    post:
+      summary: Payment notification
+      responses:
+        "202":
+          description: Accepted
+# Authentication, signature, pagination, rate limits, retries and error schemas pending.

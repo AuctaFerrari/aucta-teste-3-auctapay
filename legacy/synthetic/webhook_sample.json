@@ -1,0 +1,11 @@
+{
+  "event_id": "EVT-002",
+  "event_type": "payment.updated",
+  "occurred_at": "2026-08-16T14:30:00Z",
+  "payment": {
+    "payment_id": "P002",
+    "documento": "NF-1002",
+    "valor": 504.00,
+    "moeda": "BRL"
+  }
+}

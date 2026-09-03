@@ -1,0 +1,11 @@
+{
+  "version": "legacy-0.8-observed",
+  "evidence_status": "observed_not_approved",
+  "input": "synthetic/titles.json + synthetic/payments.json",
+  "expected_legacy_output": [
+    {"title_id":"T001","payment_id":"P001","status":"APPROVED"},
+    {"title_id":"T002","payment_id":"P002","status":"APPROVED"},
+    {"title_id":"T003","payment_id":null,"status":"OPEN"}
+  ],
+  "known_concern": "T002 is auto-approved by the legacy implementation despite being an approximate match. Preserve this as characterization evidence; do not promote it to an approved business rule."
+}

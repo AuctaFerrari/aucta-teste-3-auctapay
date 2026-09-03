@@ -1,0 +1,3 @@
+Em uma versão antiga havia um token de homologação escrito neste arquivo.
+O token foi revogado, mas o histórico ainda não passou por secret scan e saneamento.
+Não reproduzir o valor em documentação, issues ou chats. Acionar Segurança da Informação.

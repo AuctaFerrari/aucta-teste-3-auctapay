@@ -1,6 +1,6 @@
-# CLAUDE.md — <NOME_DO_PROJETO>
+# CLAUDE.md — AuctaPay Concilia (Modernização)
 
-Padrão Aucta (repo criado do template; o /init preenche os placeholders). Minimal context for ANY agent session opened in this repo — read before acting.
+Padrão Aucta (repo criado do template; preenchido pelo /init em 2026-09-03). Minimal context for ANY agent session opened in this repo — read before acting.
 
 ## Read first (in order)
 
@@ -11,17 +11,19 @@ Padrão Aucta (repo criado do template; o /init preenche os placeholders). Minim
 
 ## Non-negotiable rules
 
-- **REGRA DE OURO:** the agent only uses/alters files inside the project's connected folder and this repository. <ajustar conforme restrições do PROJECT.md>
-- Real client data NEVER enters Git (fixtures sintéticas apenas; ver DATA_CATALOG).
+- **REGRA DE OURO:** the agent only uses/alters files inside the project's OneDrive folder (`Aucta Blueprint Dev AI/inputs/teste 3`) and this repository — exclusively (TRUTH-010).
+- Real client data NEVER enters Git; homologação only with masked/synthetic data (TRUTH-008). The bundled mass is 100% synthetic (TRUTH-011).
+- `legacy/` is a READ-ONLY characterization snapshot: no refactor, no fixes, no reuse of its code/dependencies until IP/licenças are cleared (TRUTH-005). Observed behavior ≠ approved rule — taxonomy in GLOSSARY.md; T002 is a candidate defect (TRUTH-003).
 - The agent executes ALL Git (branch/commit/push/PR/merge) — the consultant never types commands (D6).
-- Business approval before merging any Muda-numero change: quem valida número está em OWNERS.md.
+- Business approval before merging any Muda-numero change: Rafael Costa (OWNERS.md). Production needs Rafael + Segurança da Informação (TRUTH-009).
+- If the vendor's original repo history is ever received: secret-sanitize BEFORE import (TRUTH-014).
 - Consultant dialogue in pt-BR per linguagem-consultor (conceitos traduzidos, abertura didática, progresso "Etapa N de X", 1 decisão por pergunta).
 
 ## Project facts
 
-- Risk tier: <tier + justificativa de uma linha>
-- Ambiente/infra: <onde a solução roda, incl. ambiente do cliente>
-- Backup: snapshot do repo em `backups/` na pasta do projeto no SharePoint a cada release (independência do GitHub).
+- Risk tier: 3 — login corporativo com perfis + integrações centrais (ERP, API, webhooks) + números de conciliação para decisão sobre dados de cliente.
+- Ambiente/infra: alvo = Azure da AuctaPay, CONDICIONADO a aprovação formal de arquitetura (TRUTH-012); PostgreSQL previsto; homolog + prod.
+- Backup: snapshot do repo em `backups/` na pasta do projeto no OneDrive a cada release; NÃO substitui backup operacional (app+DB), que depende de RPO/RTO (TRUTH-013).
 
 ## Router
 

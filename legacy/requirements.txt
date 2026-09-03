@@ -1,0 +1,4 @@
+Flask>=2
+requests
+fuzzywuzzy
+legacy-match-sdk
