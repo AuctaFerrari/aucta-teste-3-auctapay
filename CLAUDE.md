@@ -27,4 +27,22 @@ Padrão Aucta (repo criado do template; preenchido pelo /init em 2026-09-03). Mi
 
 ## Router
 
-<preenchido pelo init-plugin quando project-plugin/ existir>
+Entry point: `project-plugin/skills/router/SKILL.md` — classify the demand (type + tier), then run the minimal workflow. Never implement straight from a request: `/start-work` opens every demand and `/pre-pr` closes every one before a PR.
+
+| Demanda | Workflow | Skill |
+| --- | --- | --- |
+| Abrir qualquer mudança | `/start-work` | `project-plugin/skills/start-work/SKILL.md` |
+| Feature funcional (tier 1+) | `/build-feature` | `project-plugin/skills/build-feature/SKILL.md` |
+| Bug reproduzível / regressão | `/fix-bug` | `project-plugin/skills/fix-bug/SKILL.md` |
+| Mudança de tela / usabilidade | `/ui-change` | `project-plugin/skills/ui-change/SKILL.md` |
+| **Mudança de resultado (tier 2+)** | `/change-number` | `project-plugin/skills/change-number/SKILL.md` |
+| **Estrutural: SSO, perfis, banco, integrações, deploy (tier 3)** | `/architecture` | `project-plugin/skills/architecture/SKILL.md` |
+| Antes de abrir/atualizar PR (sempre) | `/pre-pr` | `project-plugin/skills/pre-pr/SKILL.md` |
+| Versão entregue | `/release` | `project-plugin/skills/release/SKILL.md` |
+| Troca de sessão/pessoa | `/handoff` | `project-plugin/skills/handoff/SKILL.md` |
+
+Supporting references: `project-plugin/references/pointers.md` (canonical paths + Muda-numero sentinel modules), `project-plugin/references/client-rules.md` (regras inegociáveis), `project-plugin/vendored/MANIFEST.md` (skill stack pointing at the audited copies in `AuctaFerrari/aucta-dev-core` @ `007a7d3` — no local duplication).
+
+**Sentinelas Muda-numero:** `legacy/reconcile.py` · tolerância de R$ 5,00 · critério de aprovação automática · tratamento de pagamento órfão · `tests/fixtures/golden_cases.csv` · `tests/fixtures/expected_exceptions.csv` · `tests/regression/baseline_check.py` · qualquer módulo futuro de matching, parâmetros ou relatórios.
+
+**Gates bloqueados hoje** (detalhe em `.project/init-state.md`): integração com a API do provedor (sem sandbox e spec incompleta) · SSO/perfis (sem configuração Entra ID) · deploy (arquitetura Azure sem aprovação formal) · primeiro `/change-number` (validação formal de Rafael Costa sobre golden, exceções e tolerância).
