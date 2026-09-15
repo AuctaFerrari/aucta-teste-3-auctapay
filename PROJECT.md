@@ -58,5 +58,5 @@ Sponsor: Mariana Torres (CFO) · Dono do número: Rafael Costa (Controladoria) �
 | OWNERS.md | raiz | Papéis e responsáveis |
 | DATA_CATALOG.md | .project/ | Fontes de dados (7) |
 | CHECKLIST_TIER3.md | .project/ | Cobertura dos temas de segurança, dados e operação do tier 3 |
-| init-state.md | .project/ | Estado do /init, premissas, blockers segmentados e retomada |
+| init-state.md | .project/ | Estado do /aucta-dev-plan, premissas, blockers segmentados e retomada |
 | project-plugin/ | raiz | Router e workflows (capacidades carregadas sob demanda) |

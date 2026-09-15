@@ -10,7 +10,7 @@ Ordem de leitura na abertura de sessão: **PROJECT.md → TRUTHS.md → Issue/Sp
 | ACCEPTANCE.md | `ACCEPTANCE.md` | ACC-001..008, marcos M1–M7, estratégia de provas |
 | OWNERS.md | `OWNERS.md` | Quem valida número (Rafael Costa), quem autoriza produção (Rafael + SI) |
 | DATA_CATALOG.md | `.project/DATA_CATALOG.md` | 7 fontes, sensibilidade, o que está `não validado` |
-| Estado do /init | `.project/init-state.md` | O que está fechado, premissas, blockers segmentados, retomada |
+| Estado do /aucta-dev-plan | `.project/init-state.md` | O que está fechado, premissas, blockers segmentados, retomada |
 | Golden cases | `tests/fixtures/golden_cases.csv` | GC-01..03 com colunas intermediárias; tolerância R$ 0,00 |
 | Exceções esperadas | `tests/fixtures/expected_exceptions.csv` | EX-01..05 (EX-01 e EX-04 bloqueiam publicação) |
 | Estratégia de testes | `tests/TEST_STRATEGY.md` | Suites por fase e gates |

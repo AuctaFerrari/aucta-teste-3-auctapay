@@ -63,6 +63,6 @@ Skills de UI entram na pilha quando o marco de telas começar — pedido ao núc
 
 ## Drift check
 
-Executado pelo init-check ou sob demanda, contra o `MANIFEST.md` do núcleo: compara o blob SHA de cada arquivo vendorizado com o upstream em HEAD. Upstream alterado → sinaliza para auditoria; **operação continua** sobre a cópia do núcleo. Upstream inacessível → só relata. **Drift de PATH ≠ drift de conteúdo**: o núcleo já registra a reorganização de pastas do mattpocock (blobs idênticos em caminhos novos).
+Executado pelo plan-check ou sob demanda, contra o `MANIFEST.md` do núcleo: compara o blob SHA de cada arquivo vendorizado com o upstream em HEAD. Upstream alterado → sinaliza para auditoria; **operação continua** sobre a cópia do núcleo. Upstream inacessível → só relata. **Drift de PATH ≠ drift de conteúdo**: o núcleo já registra a reorganização de pastas do mattpocock (blobs idênticos em caminhos novos).
 
 Última execução: 2026-09-03 (init-check, P11) — 4 skills conferidas por amostragem; `security-and-hardening` com upstream alterado (`c00236e` → `cf093e9`), sinalizada para auditoria no núcleo, sem bloqueio.
